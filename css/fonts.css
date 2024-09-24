@@ -1,0 +1,12 @@
+body {
+  font-family: "Comfortaa", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.alt-font {
+  font-family: "Titan One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}

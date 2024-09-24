@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mathez</title>
+    <title>Inicio sesion</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,8 +14,8 @@
   </head>
 
   <body>
+    <!-- body -->
     <main>
-      <!-- body -->
       <div class="tittle">
         <a class="link" href="./index.html">
           <h1 class="alt-font t-size-4">Mathez</h1>
@@ -24,20 +24,34 @@
 
       <div class="card-menu">
         <div class="card">
-          <p class="card-text">
-            "Los problemas matemáticos no son más que ejercicios para entrenar a nuestros cerebros."
-            <br />
-            - Albert Einstein
-          </p>
+          <div class="card-tittle">
+            <h2 class="alt-font">Iniciar sesion</h2>
+          </div>
+
           <div class="form">
-            <!-- <button class="alt-font" >Login</button> -->
-            <a class="btn alt-font" href="./login.html">Iniciar Sesión</a>
-            <a class="btn alt-font" href="./login.html">Registro</a>
+            <form action="./php/login.php" method="post" id="login" class="">
+              <div class="form-input">
+                <label for="numCta" class="alt-font">Usuario</label>
+                <input
+                  type="text"
+                  name="numCta"
+                  id="numCta"
+                  placeholder="numero de cuenta"
+                  autofocus
+                  required />
+              </div>
+              <div class="form-input">
+                <label for="passwd" class="alt-font">Contraseña</label>
+                <input type="password" name="passwd" id="passwd" placeholder="contraseña" required />
+              </div>
+            </form>
+            <a href="./passwdRecover.html" class="rec-link">Olvide mi contraseña</a>
+            <a href="./regis.html" class="btn-alt alt-font">Registro</a>
+            <button type="submit" form="login" class="btn alt-font">Iniciar Sesion</button>
           </div>
         </div>
       </div>
     </main>
-
     <!-- Footer -->
     <footer>
       <div class="footer">
