@@ -38,7 +38,7 @@ Los que ingresen con registro tendrán acceso a todo el catálogo de problemas m
    - factorización
 7. Racionalización - simplificación
 8. Razones trigonométricas
-   - identidades (creo xd)
+   - identidades
    - ángulo doble
 9. Variabilidad - derivada
 10. Sucesiones - series
