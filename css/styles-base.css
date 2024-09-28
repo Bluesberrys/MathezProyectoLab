@@ -12,7 +12,7 @@ main {
   width: 100%;
 }
 
-.tittle {
+.title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,12 +20,16 @@ main {
   font-size: 5rem;
 }
 
-.tittle a {
+.title a {
   text-decoration: none;
   color: #fff;
 }
 
-.tittle h1 {
+/* .title a:hover {
+  color: #eee;
+} */
+
+.title h1 {
   margin: 0;
 }
 
@@ -125,6 +129,10 @@ main {
   cursor: pointer;
 }
 
+.btn:hover {
+  background-color: #4d70b1;
+}
+
 .btn-alt {
   display: flex;
   justify-content: center;
@@ -138,6 +146,10 @@ main {
   border: #666 solid 4px;
   color: #666;
   cursor: pointer;
+}
+
+.btn-alt:hover {
+  background-color: #4d70b1;
 }
 
 .footer {
@@ -154,11 +166,32 @@ main {
   font-size: 1.5rem;
 }
 
-.footer a {
+.footer a.btn {
   background-color: #fff;
   color: #000;
   font-size: 2rem;
   min-width: 0;
   min-height: 0;
   padding: 10px 15px;
+}
+.footer a.btn:hover {
+  background-color: #eee;
+}
+
+.view {
+  display: none;
+}
+.view.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form-page {
+  display: none;
+}
+.form-page.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }

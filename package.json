@@ -1,0 +1,17 @@
+{
+  "name": "mathezproyectolab",
+  "version": "1.0.0",
+  "description": "Actualmente, muchos estudiantes tienen problemas en temas matemáticos, por lo que crear un sistema para resolver estos problemas implica desafíos como manejar la diversidad de temas, entender problemas en lenguaje natural, adaptarse a diferentes enfoques de solución, ofrecer una interfaz intuitiva, proporcionar explicaciones detalladas de los pasos, manejar errores y asegurar que sea escalable, rápido y accesible para todos los usuarios, independientemente de sus habilidades o discapacidades.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.0",
+    "mysql2": "^3.11.3"
+  }
+}

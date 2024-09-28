@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mathez</title>
+    <link rel="icon" type="image/png" href="./img/M-titanone.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,23 +17,121 @@
   <body>
     <main>
       <!-- body -->
-      <div class="tittle">
-        <a class="link" href="./index.html">
-          <h1 class="alt-font t-size-4">Mathez</h1>
+      <div class="title">
+        <a href="#" onclick="navigateToHome(); return false;" class="alt-font">
+          <h1>Mathez</h1>
         </a>
       </div>
 
       <div class="card-menu">
         <div class="card">
-          <p class="card-text">
-            "Los problemas matemáticos no son más que ejercicios para entrenar a nuestros cerebros."
-            <br />
-            - Albert Einstein
-          </p>
-          <div class="form">
-            <!-- <button class="alt-font" >Login</button> -->
-            <a class="btn alt-font" href="./login.html">Iniciar Sesión</a>
-            <a class="btn alt-font" href="./login.html">Registro</a>
+          <!-- Home View -->
+          <div id="homeView" class="view active">
+            <p class="card-text">
+              "Los problemas matemáticos no son más que ejercicios para entrenar a nuestros cerebros."
+              <br />- Albert Einstein
+            </p>
+            <div class="form">
+              <button onclick="showView('login')" class="btn alt-font">Iniciar Sesión</button>
+              <button onclick="showView('register')" class="btn alt-font">Registro</button>
+            </div>
+          </div>
+
+          <!-- Login View -->
+          <div id="loginView" class="view">
+            <div class="card-title">
+              <h2 id="iniciar-sesion" class="alt-font">Iniciar sesion</h2>
+            </div>
+            <!-- Form -->
+            <form id="loginForm" class="form">
+              <div class="form-input">
+                <label for="loginNumCta">Número de Cuenta</label>
+                <input
+                  type="text"
+                  id="loginNumCta"
+                  name="loginNumCta"
+                  placeholder="Numero de cuenta"
+                  autofocus
+                  required />
+              </div>
+              <div class="form-input">
+                <label for="loginPasswd">Contraseña</label>
+                <input
+                  type="password"
+                  id="loginPasswd"
+                  name="loginPasswd"
+                  placeholder="Contraseña"
+                  required />
+              </div>
+              <a href="#" onclick="showView('passwordRecovery'); return false;" class="rec-link"
+                >Olvide mi contraseña</a
+              >
+              <button type="submit" class="btn">Iniciar Sesion</button>
+            </form>
+          </div>
+
+          <!-- Register View -->
+          <div id="registerView" class="view">
+            <div class="card-title">
+              <h2 id="registro" class="alt-font">Registro</h2>
+            </div>
+            <form id="registroForm" class="form">
+              <div id="page1" class="form-page active">
+                <div class="form-input">
+                  <label for="email">Correo electrónico</label>
+                  <input type="email" id="email" name="email" placeholder="Email" required />
+                </div>
+                <div class="form-input">
+                  <label for="passwd">Contraseña</label>
+                  <input type="password" id="passwd" name="passwd" placeholder="Contraseña" required />
+                </div>
+                <div class="form-input">
+                  <label for="confirmPasswd">Confirmar Contraseña</label>
+                  <input
+                    type="password"
+                    id="confirmPasswd"
+                    name="confirmPasswd"
+                    placeholder="Contraseña"
+                    required />
+                </div>
+                <button type="button" id="nextBtn" class="btn">Siguiente</button>
+              </div>
+              <div id="page2" class="form-page">
+                <div class="form-input">
+                  <label for="apellidoP">Apellido Paterno</label>
+                  <input
+                    type="text"
+                    id="apellidoP"
+                    name="apellidoP"
+                    placeholder="Apellido paterno"
+                    required />
+                </div>
+                <div class="form-input">
+                  <label for="apellidoM">Apellido Materno</label>
+                  <input
+                    type="text"
+                    id="apellidoM"
+                    name="apellidoM"
+                    placeholder="Apellido materno"
+                    required />
+                </div>
+                <div class="form-input">
+                  <label for="nombres">Nombres</label>
+                  <input type="text" id="nombres" name="nombres" placeholder="Nombres" required />
+                </div>
+                <button type="button" id="prevBtn" class="btn-alt">Anterior</button>
+                <button type="submit" class="btn">Registro</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Password Recovery View (placeholder) -->
+          <div id="passwordRecoveryView" class="view">
+            <div class="card-title">
+              <h2 class="alt-font">Recuperar Contraseña</h2>
+            </div>
+            <p>Funcionalidad de recuperación de contraseña pendiente.</p>
+            <button onclick="showView('login')" class="btn">Volver a Iniciar Sesión</button>
           </div>
         </div>
       </div>
@@ -47,5 +146,7 @@
         <a href="./sobreNos.html" class="btn">Sobre nosotros</a>
       </div>
     </footer>
+
+    <script src="./js/index.js"></script>
   </body>
 </html>
