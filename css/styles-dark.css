@@ -48,7 +48,7 @@ body.dark-mode .form-input input {
   border-bottom-color: #111;
 }
 
-::placeholder {
+body.dark-mode ::placeholder {
   color: #6a96f6;
 }
 
