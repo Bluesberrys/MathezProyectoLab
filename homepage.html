@@ -27,10 +27,20 @@
         </div>
         <div class="navbar-menu">
           <div class="user-dropdown-container">
-            <button id="userDropdownToggle" class="user-icon"><i class="bi bi-person-circle"></i></button>
+            <button id="userDropdownToggle" class="user-icon">
+              <!-- <img src="./img/test_pfp.png" alt="" /> -->
+              <i class="bi bi-person-circle"></i>
+            </button>
             <div class="user-dropdown" id="userDropdown">
               <button onclick="" class="btn alt-font dropdown-item">Configuracion</button>
               <button onclick="logout()" class="btn alt-font dropdown-item">Cerrar sesion</button>
+              <div class="darkmode-container dropdown-item">
+                <h4>Modo oscuro</h4>
+                <label class="switch">
+                  <input type="checkbox" id="darkModeToggle" />
+                  <span class="slider"></span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -40,7 +50,7 @@
     <!-- body -->
     <main>
       <div class="container">
-        <div class="title">
+        <div class="container-title">
           <h1 class="alt-font">Tabla de contenidos</h1>
         </div>
 
@@ -101,9 +111,6 @@
           <p>©</p>
         </div>
         <a href="./sobreNos.html" class="btn">Sobre nosotros</a>
-        <button id="darkModeToggle" class="dark-mode-toggle">
-          <i class="bi bi-moon-fill"></i>
-        </button>
       </div>
     </footer>
 

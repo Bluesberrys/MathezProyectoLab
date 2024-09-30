@@ -1,3 +1,7 @@
+:root {
+  --pfp-max-size: 80px;
+}
+
 body {
   background-image: url(../img/math_elements.png);
   background-blend-mode: multiply;
@@ -13,6 +17,27 @@ main {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+  min-height: 120px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 4rem;
+  background-color: #5d83d6;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+button.btn {
+  font-size: 2rem;
+  min-height: 0;
+  padding: 10px 15px;
 }
 
 .navbar {
@@ -44,11 +69,25 @@ main {
 }
 
 .user-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 6rem;
   color: #fff;
+  max-width: var(--pfp-max-size);
+  max-height: var(--pfp-max-size);
+  clip-path: circle(var(--pfp-max-size));
+  margin: 5px 0;
+}
+
+.user-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .user-dropdown {
@@ -56,10 +95,9 @@ main {
   position: absolute;
   right: 0;
   top: 100%;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: #dbdbdb;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   padding: 15px;
 }
@@ -72,19 +110,8 @@ main {
 
 .dropdown-item {
   display: block;
-  padding: 10px 15px;
   color: #333;
   text-decoration: none;
-  font-size: 1rem;
-}
-
-.dropdown-item:hover {
-  background-color: #4a69ae;
-}
-
-.user-icon {
-  color: #fff;
-  font-size: 4rem;
 }
 
 .container {
@@ -117,6 +144,10 @@ main {
   width: 50%;
 }
 
+.container-title {
+  font-size: 2.5rem;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -127,34 +158,13 @@ main {
   border-radius: 12px;
   text-decoration: none;
   color: #000;
-  font-size: 2rem;
+  font-size: 1.8rem;
   height: 30vh;
 }
 
 .card h2,
-.card h3 {
+.card-title {
   margin: 1%;
-}
-
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 100%;
-  min-height: 120px;
-  border-radius: 12px;
-  text-decoration: none;
-  font-size: 4rem;
-  background-color: #5d83d6;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-}
-
-button.btn {
-  font-size: 1.5rem;
-  min-height: 0;
-  padding: 10px;
 }
 
 .footer {
@@ -172,7 +182,7 @@ button.btn {
   font-size: 1.5rem;
 }
 
-.footer a {
+.footer a.btn {
   background-color: #fff;
   color: #000;
   font-size: 2rem;
@@ -183,4 +193,47 @@ button.btn {
 
 .footer a.btn:hover {
   background-color: #eee;
+}
+
+@media screen and (max-width: 834px) {
+  .container {
+    width: 90%;
+    padding: 0;
+    margin: 5% 0;
+  }
+  .row {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .col {
+    width: 100%;
+  }
+  .card {
+    min-height: 120px;
+    height: auto;
+  }
+  button.btn {
+    font-size: 2.5rem;
+  }
+  .container-title {
+    font-size: 1.9rem;
+  }
+  .footer a.btn {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .title a {
+    font-size: 3.5rem;
+  }
+  .card {
+    height: auto;
+  }
+  .container-title {
+    font-size: 1rem;
+  }
+  .footer {
+    flex-direction: column-reverse;
+  }
 }

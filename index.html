@@ -54,7 +54,7 @@
                   type="text"
                   id="loginNumCta"
                   name="loginNumCta"
-                  placeholder="Numero de cuenta"
+                  placeholder="Numero"
                   autofocus
                   required />
               </div>
@@ -70,7 +70,7 @@
               <a href="#" onclick="showView('passwordRecovery'); return false;" class="rec-link"
                 >Olvide mi contraseña</a
               >
-              <button type="submit" class="btn">Iniciar Sesion</button>
+              <button type="submit" class="btn alt-font">Iniciar Sesion</button>
             </form>
           </div>
 
@@ -98,7 +98,7 @@
                     placeholder="Contraseña"
                     required />
                 </div>
-                <button type="button" id="nextBtn" class="btn">Siguiente</button>
+                <button type="button" id="nextBtn" class="btn alt-font">Siguiente</button>
               </div>
               <div id="page2" class="form-page">
                 <div class="form-input">
@@ -123,8 +123,8 @@
                   <label for="nombres">Nombres</label>
                   <input type="text" id="nombres" name="nombres" placeholder="Nombres" required />
                 </div>
-                <button type="button" id="prevBtn" class="btn-alt">Anterior</button>
-                <button type="submit" class="btn">Registro</button>
+                <button type="button" id="prevBtn" class="btn-alt alt-font">Anterior</button>
+                <button type="submit" class="btn alt-font">Registro</button>
               </div>
             </form>
           </div>
@@ -148,9 +148,15 @@
           <p>©</p>
         </div>
         <a href="./sobreNos.html" class="btn">Sobre nosotros</a>
-        <button id="darkModeToggle" class="dark-mode-toggle">
-          <i class="bi bi-moon-fill"></i>
-        </button>
+        <div>
+          <div class="darkmode-container">
+            <h4>Modo oscuro</h4>
+            <label class="switch">
+              <input type="checkbox" id="darkModeToggle" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
       </div>
     </footer>
 
