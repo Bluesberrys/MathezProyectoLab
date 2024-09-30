@@ -195,7 +195,7 @@ button.btn {
   background-color: #eee;
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: 1024px) {
   .container {
     width: 90%;
     padding: 0;
