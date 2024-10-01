@@ -42,3 +42,7 @@ Los que ingresen con registro tendrán acceso a todo el catálogo de problemas m
    - ángulo doble
 9. Variabilidad - derivada
 10. Sucesiones - series
+
+## **Funciomamiento**
+
+Sistema hecho utilizando el framework Node.js
