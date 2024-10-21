@@ -40,6 +40,25 @@ function logout() {
     });
 }
 
+function initializeDropdown() {
+  const userDropdownToggle = document.getElementById("userDropdownToggle");
+  const userDropdown = document.getElementById("userDropdown");
+
+  if (userDropdownToggle && userDropdown) {
+    userDropdownToggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      userDropdown.classList.toggle("active");
+    });
+
+    // Close the dropdown when clicking outside of it
+    document.addEventListener("click", function (e) {
+      if (!userDropdown.contains(e.target) && !userDropdownToggle.contains(e.target)) {
+        userDropdown.classList.remove("active");
+      }
+    });
+  }
+}
+
 // Index page specific functions
 function initializeIndexPage() {
   console.log("Index page loaded");
@@ -190,22 +209,8 @@ function initializeHomePage() {
   console.log("Token found, fetching user data");
   fetchUserData();
 
-  const userDropdownToggle = document.getElementById("userDropdownToggle");
-  const userDropdown = document.getElementById("userDropdown");
-
-  if (userDropdownToggle && userDropdown) {
-    userDropdownToggle.addEventListener("click", function (e) {
-      e.stopPropagation();
-      userDropdown.classList.toggle("active");
-    });
-
-    // Close the dropdown when clicking outside of it
-    document.addEventListener("click", function (e) {
-      if (!userDropdown.contains(e.target) && !userDropdownToggle.contains(e.target)) {
-        userDropdown.classList.remove("active");
-      }
-    });
-  }
+  // Initialize dropdown
+  initializeDropdown();
 }
 
 function fetchUserData() {
@@ -328,11 +333,168 @@ document.addEventListener("DOMContentLoaded", function () {
     initializeIndexPage();
   } else if (currentPath.includes("homepage.html")) {
     initializeHomePage();
+  } else if (currentPath.includes("configPerfil.html")) {
+    initializeSettingsPage();
   } else {
-    // For other pages (like sobreNos.html), just initialize dark mode
+    // For other pages (like sobreNos.html), just initialize dark mode and dropdown
     initializeDarkMode();
+    initializeDropdown();
   }
 });
+
+// Settins page specific functions
+function initializeSettingsPage() {
+  // Initialize dark mode
+  initializeDarkMode();
+
+  // Initialize dropdown
+  initializeDropdown();
+
+  // Settings navigation
+  const sidebarLinks = document.querySelectorAll(".settings-sidebar a");
+  const settingsSections = document.querySelectorAll(".settings-section");
+
+  sidebarLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href").slice(1);
+
+      // Update active link
+      sidebarLinks.forEach((l) => l.classList.remove("active"));
+      this.classList.add("active");
+
+      // Show target section, hide others
+      settingsSections.forEach((section) => {
+        if (section.id === targetId) {
+          section.classList.add("active");
+        } else {
+          section.classList.remove("active");
+        }
+      });
+    });
+  });
+
+  // Form submission handlers
+  const forms = document.querySelectorAll("form");
+  forms.forEach((form) => {
+    form.addEventListener("submit", handleFormSubmit);
+  });
+
+  // Populate user info form
+  populateUserForm();
+}
+
+function populateUserForm() {
+  const token = localStorage.getItem("authToken");
+  fetch("/api/user", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((userData) => {
+      document.getElementById("updateNombres").value = userData.nombres;
+      document.getElementById("updateApellidoP").value = userData.apellidoP;
+      document.getElementById("updateApellidoM").value = userData.apellidoM;
+      document.getElementById("updateEmail").value = userData.email;
+      document.getElementById("updateNumCta").value = userData.numCta;
+    })
+    .catch((error) => console.error("Error fetching user data:", error));
+}
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+  const formId = event.target.id;
+  const formData = new FormData(event.target);
+  const updateData = Object.fromEntries(formData.entries());
+
+  // Handle specific form submissions
+  switch (formId) {
+    case "updateUserForm":
+      updateUserInfo(updateData);
+      break;
+    case "updateSecurityForm":
+      updateSecuritySettings(updateData);
+      break;
+    case "updateNotificationsForm":
+      updateNotificationSettings(updateData);
+      break;
+    case "updatePrivacyForm":
+      updatePrivacySettings(updateData);
+      break;
+    default:
+      console.error("Unknown form submitted:", formId);
+  }
+}
+
+function updateUserInfo(updateData) {
+  const token = localStorage.getItem("authToken");
+  fetch("/api/user/update", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updateData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        alert("Información personal actualizada exitosamente");
+      } else {
+        alert("Error al actualizar la información: " + data.message);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Ocurrió un error al actualizar la información personal");
+    });
+}
+
+function updateSecuritySettings(updateData) {
+  if (updateData.passwd && updateData.passwd !== updateData.confirmPasswd) {
+    alert("Las contraseñas no coinciden");
+    return;
+  }
+
+  delete updateData.confirmPasswd;
+  // Remove twoFactorAuth from updateData as it's not implemented yet
+  delete updateData.twoFactorAuth;
+
+  const token = localStorage.getItem("authToken");
+  fetch("/api/user/security", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updateData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        alert("Contraseña actualizada exitosamente");
+      } else {
+        alert("Error al actualizar la contraseña: " + data.message);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Ocurrió un error al actualizar la configuración de seguridad");
+    });
+}
+
+function updateNotificationSettings(updateData) {
+  alert("La actualización de preferencias de notificaciones estará disponible próximamente.");
+  // You can still send the data to the server for logging purposes if you want
+  console.log("Notification settings to be implemented:", updateData);
+}
+
+function updatePrivacySettings(updateData) {
+  alert("La actualización de configuración de privacidad estará disponible próximamente.");
+  // You can still send the data to the server for logging purposes if you want
+  console.log("Privacy settings to be implemented:", updateData);
+}
 
 // Dark mode functions
 function initializeDarkMode() {
