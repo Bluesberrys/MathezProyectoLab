@@ -211,6 +211,9 @@ function initializeHomePage() {
 
   // Initialize dropdown
   initializeDropdown();
+
+  // Initialize course registration form
+  initializeCourseRegistration();
 }
 
 function fetchUserData() {
@@ -224,8 +227,8 @@ function fetchUserData() {
     .then((response) => {
       console.log("Homepage response status:", response.status);
       if (!response.ok) {
-        return response.text().then((text) => {
-          throw new Error(`Not authorized: ${text}`);
+        return response.json().then((errorData) => {
+          throw new Error(errorData.error || "Not authorized");
         });
       }
       return response.json();
@@ -241,7 +244,9 @@ function fetchUserData() {
     })
     .catch((error) => {
       console.error("Error fetching user data:", error);
-      if (error.message.includes("Not authorized")) {
+      if (error.message.includes("Database table missing")) {
+        alert("There was a problem with the database. Please try again later or contact support.");
+      } else if (error.message.includes("Not authorized")) {
         console.log("Not authorized, removing token and redirecting to index");
         localStorage.removeItem("authToken");
         window.location.href = "./index.html";
@@ -324,6 +329,115 @@ function displayNotEnrolledMessage() {
   } else {
     console.error("mainContent element not found");
   }
+}
+
+function initializeCourseRegistration() {
+  const showCourseRegistrationButton = document.getElementById("showCourseRegistrationButton");
+  const courseRegistrationContainer = document.getElementById("courseRegistrationContainer");
+  const courseRegistrationForm = document.getElementById("courseRegistrationForm");
+  const courseSelect = document.getElementById("courseSelect");
+  const courseOptions = document.getElementById("courseOptions");
+
+  if (showCourseRegistrationButton && courseRegistrationContainer) {
+    showCourseRegistrationButton.addEventListener("click", () => {
+      courseRegistrationContainer.classList.toggle("hidden");
+    });
+  }
+
+  // Handle course registration
+  if (courseRegistrationForm) {
+    courseRegistrationForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const selectedCourse = courseSelect.value;
+      if (selectedCourse) {
+        registerCourse(selectedCourse);
+      } else {
+        alert("Por favor selecciona un curso");
+      }
+    });
+  }
+
+  // Fetch and populate available courses
+  fetchAvailableCourses();
+}
+
+function fetchAvailableCourses() {
+  const token = localStorage.getItem("authToken");
+  const courseOptions = document.getElementById("courseOptions");
+
+  // Clear existing options to prevent duplicates
+  if (courseOptions) {
+    courseOptions.innerHTML = "";
+  }
+
+  fetch("/api/courses", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((courses) => {
+      if (courseOptions) {
+        courses.forEach((course) => {
+          const option = document.createElement("option");
+          option.value = course.nombre;
+          option.textContent = course.nombre;
+          courseOptions.appendChild(option);
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching courses:", error);
+      alert("Error al cargar los cursos disponibles");
+    });
+}
+
+function registerCourse(courseName) {
+  const token = localStorage.getItem("authToken");
+
+  fetch("/api/register-course", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ courseName }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((err) => Promise.reject(err));
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data.success) {
+        alert("Registro de curso exitoso");
+        // Hide the registration container
+        const courseRegistrationContainer = document.getElementById("courseRegistrationContainer");
+        if (courseRegistrationContainer) {
+          courseRegistrationContainer.style.display = "none";
+        }
+        // Clear the input field
+        const courseSelect = document.getElementById("courseSelect");
+        if (courseSelect) {
+          courseSelect.value = "";
+        }
+        // Refresh the page to show updated course list
+        window.location.reload();
+      } else {
+        alert("Error al registrar el curso: " + data.message);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Ocurrió un error al registrar el curso: " + (error.message || "Error desconocido"));
+    });
 }
 
 // Initialize the appropriate page based on the current URL

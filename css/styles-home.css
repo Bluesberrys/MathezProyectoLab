@@ -149,6 +149,14 @@ button.btn {
   border-radius: 22px;
 }
 
+.course-bttn {
+  margin: 2%;
+}
+
+.hidden {
+  display: none;
+}
+
 .title h1 {
   font-size: 4rem;
 }
@@ -189,6 +197,31 @@ button.btn {
 .card h2,
 .card-title {
   margin: 1%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.4rem;
+  width: 100%;
+}
+
+.form-group input,
+.form-group datalist {
+  font-size: 1.8rem;
+}
+
+#courseRegistrationForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 30%;
+  margin-bottom: 20px;
 }
 
 .footer {

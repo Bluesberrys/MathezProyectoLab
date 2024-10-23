@@ -167,6 +167,54 @@ app.post("/api/user/privacy", verifyToken, async (req, res) => {
   res.json({ success: true, message: "Privacy settings update acknowledged (not implemented yet)" });
 });
 
+// Route to fetch available courses
+app.get("/api/courses", verifyToken, async (req, res) => {
+  try {
+    const [results] = await pool.query(
+      `
+      SELECT c.nombre
+      FROM Cursos c
+      WHERE c.id_curso NOT IN (
+        SELECT i.id_curso
+        FROM Inscripciones i
+        WHERE i.numCta = ?
+      )
+    `,
+      [req.userId]
+    );
+    res.json(results);
+  } catch (error) {
+    console.error("Error fetching available courses:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Route to register for a course
+app.post("/api/register-course", verifyToken, async (req, res) => {
+  const { courseName } = req.body;
+  try {
+    // First, get the course ID
+    const [courseResults] = await pool.query("SELECT id_curso FROM Cursos WHERE nombre = ?", [courseName]);
+
+    if (courseResults.length === 0) {
+      return res.status(404).json({ success: false, message: "Curso no encontrado" });
+    }
+
+    const courseId = courseResults[0].id_curso;
+
+    // Now, register the user for the course
+    await pool.query(
+      "INSERT INTO Inscripciones (id_curso, numCta, fecha_inicio, progreso, estatus) VALUES (?, ?, CURRENT_DATE(), 0, 'En progreso')",
+      [courseId, req.userId]
+    );
+
+    res.json({ success: true, message: "Registro de curso exitoso" });
+  } catch (error) {
+    console.error("Error registering for course:", error);
+    res.status(500).json({ success: false, message: "Error interno del servidor" });
+  }
+});
+
 // Homepage route
 app.get("/homepage", verifyToken, async (req, res) => {
   console.log("Homepage request for userId:", req.userId);
@@ -175,7 +223,7 @@ app.get("/homepage", verifyToken, async (req, res) => {
       "SELECT apellidoP, apellidoM, nombres FROM Alumnos WHERE numCta = ?",
       [req.userId]
     );
-    const [inscripcionResults] = await pool.query("SELECT * FROM inscripciones WHERE numCta = ?", [
+    const [inscripcionResults] = await pool.query("SELECT * FROM Inscripciones WHERE numCta = ?", [
       req.userId,
     ]);
 
@@ -196,7 +244,11 @@ app.get("/homepage", verifyToken, async (req, res) => {
     res.json(userData);
   } catch (error) {
     console.error("Error fetching user data:", error);
-    res.status(500).json({ error: "Internal server error" });
+    if (error.code === "ER_NO_SUCH_TABLE") {
+      res.status(500).json({ error: "Database table missing. Please contact the administrator." });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 });
 

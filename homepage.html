@@ -50,17 +50,35 @@
     <!-- body -->
     <main>
       <div class="container">
-        <h2 id="userGreeting">
-          <!-- Greeting will be dynamically inserted here -->
-        </h2>
         <div class="container-title">
           <h1 class="alt-font">Tabla de contenidos</h1>
         </div>
+        <h2 id="userGreeting" class="row">
+          <!-- Greeting will be dynamically inserted here -->
+        </h2>
         <div class="row" id="mainContent">
           <!-- Content will be dynamically inserted here -->
         </div>
+
         <!-- Course enrollment and registration -->
-        <div></div>
+        <div class="course-bttn">
+          <button id="showCourseRegistrationButton" class="btn alt-font">Registrar Curso</button>
+        </div>
+      </div>
+
+      <!-- Course registration form -->
+      <div id="courseRegistrationContainer" class="container hidden">
+        <h2 id="registrar-curso" class="container-title">Registro de curso</h2>
+        <form id="courseRegistrationForm">
+          <div class="form-group">
+            <label for="courseSelect">Selecciona un curso:</label>
+            <input type="text" id="courseSelect" list="courseOptions" class="base-font" required />
+            <datalist id="courseOptions">
+              <!-- Options will be dynamically inserted here -->
+            </datalist>
+          </div>
+          <button type="submit" class="btn alt-font">Registrar</button>
+        </form>
       </div>
     </main>
 
