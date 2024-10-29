@@ -1,0 +1,200 @@
+#container {
+  display: flex;
+  justify-content: center;
+  padding: 60px;
+}
+
+#chartContainer2 {
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 60px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+
+.container-title {
+  font-size: 2rem;
+}
+
+.container button {
+  margin: 15px 0;
+}
+
+.topic-section {
+  margin: 20px;
+  font-size: 1.8rem;
+}
+
+.topic-subtitle {
+  font-weight: 800;
+}
+
+/*Boton para pasar de curos*/
+/* From Uiverse.io by Gaurav-WebDev */
+#boton-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}
+
+.button {
+  height: 90px;
+  width: 300px;
+  position: relative;
+  background-color: transparent;
+  cursor: pointer;
+  border: 2px solid #2b74da;
+  overflow: hidden;
+  border-radius: 30px;
+  color: #333;
+  transition: all 0.5s ease-in-out;
+}
+
+.btn-txt {
+  z-index: 1;
+  font-weight: 800;
+  letter-spacing: 5px;
+  font-size: 20px;
+}
+
+.type1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all 0.5s ease-in-out;
+  background-color: #2b74da;
+  border-radius: 30px;
+  visibility: hidden;
+  height: 10px;
+  width: 10px;
+  z-index: -1;
+}
+
+.button:hover {
+  box-shadow: 1px 1px 200px #2b74da;
+  color: #fff;
+  border: none;
+}
+
+.type1:hover::after {
+  visibility: visible;
+  transform: scale(100) translateX(2px);
+}
+
+/*Boton para pasar de cursos*/
+.h2-contenido {
+  color: #7a7a7a;
+  text-align: justify;
+}
+
+#controls {
+  width: 25%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#controls h2 {
+  color: #2b74da;
+  font-size: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 16px;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-top: 5px;
+}
+
+#calculateBtn {
+  width: 100%;
+  background-color: #2b74da;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#calculateBtn:hover {
+  background-color: #1d57a8;
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+.nav-container h2 {
+  margin-left: auto;
+  padding-right: 50px;
+}
+#footer {
+  margin-top: 20px;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+.dropdown {
+  float: right;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  color: blue;
+  padding: 14px 30px;
+  background-color: white;
+  margin: 0px;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  display: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown-content a:hover {
+  background-color: whitbe;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown:hover .dropbtn {
+  background-color: rgb(240, 200, 0);
+  color: white;
+}
