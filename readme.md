@@ -45,4 +45,4 @@ Los que ingresen con registro tendrán acceso a todo el catálogo de problemas m
 
 ## **Funciomamiento**
 
-Sistema hecho utilizando el framework Node.js
+Sistema hecho utilizando el framework Node.js y con contenedores de docker
