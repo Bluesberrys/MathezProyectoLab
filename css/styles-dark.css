@@ -138,6 +138,53 @@ body.dark-mode .dark-mode-toggle {
   transform: translateX(1.5em);
 }
 
+/* Dark mode styles for settings page */
+body.dark-mode .settings-sidebar {
+  background-color: #2a3b61;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .settings-sidebar a {
+  color: #fff;
+}
+
+body.dark-mode .settings-sidebar a:hover,
+body.dark-mode .settings-sidebar a.active {
+  background-color: #3b548a;
+}
+
+body.dark-mode .settings-section {
+  background-color: #2a3b61;
+  color: #fff;
+}
+
+body.dark-mode .form-group input[type="text"],
+body.dark-mode .form-group input[type="email"],
+body.dark-mode .form-group input[type="password"] {
+  background-color: #3b548a;
+  color: #fff;
+  border-color: #5d83d6;
+}
+
+body.dark-mode .form-group input[type="text"]:disabled {
+  background-color: #1e2b4a;
+  color: #8a9bbd;
+  border-color: #3b548a;
+}
+
+body.dark-mode .form-group input::placeholder {
+  color: #6a96f6;
+}
+
+body.dark-mode .btn {
+  background-color: #5d83d6;
+  color: #fff;
+}
+
+body.dark-mode .btn:hover {
+  background-color: #4d70b1;
+}
+
 @media screen and (max-width: 1024px) {
   .switch {
     font-size: 2rem;
@@ -145,7 +192,4 @@ body.dark-mode .dark-mode-toggle {
   .darkmode-container h4 {
     font-size: 2rem;
   }
-}
-
-@media screen and (max-width: 576px) {
 }

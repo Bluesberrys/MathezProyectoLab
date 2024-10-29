@@ -1,5 +1,7 @@
 :root {
-  --pfp-max-size: 80px;
+  --pfp-max-size: 60px;
+  --anim-btn-color: #5d83d6;
+  --anim-btn-shadow-color: #4d70b1;
 }
 
 body {
@@ -32,6 +34,10 @@ main {
   border: none;
   color: #fff;
   cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #5173bd;
 }
 
 button.btn {
@@ -75,7 +81,7 @@ button.btn {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 6rem;
+  font-size: 5rem;
   color: #fff;
   max-width: var(--pfp-max-size);
   max-height: var(--pfp-max-size);
@@ -114,6 +120,26 @@ button.btn {
   text-decoration: none;
 }
 
+.dropdown-item.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 220px;
+  min-height: 100px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 2.2rem;
+  background-color: #5d83d6;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dropdown-item.btn:hover {
+  background-color: #5173bd;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -123,6 +149,14 @@ button.btn {
   width: 70%;
   margin: 20px;
   border-radius: 22px;
+}
+
+.course-bttn {
+  margin: 2%;
+}
+
+.hidden {
+  display: none;
 }
 
 .title h1 {
@@ -167,6 +201,31 @@ button.btn {
   margin: 1%;
 }
 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.4rem;
+  width: 100%;
+}
+
+.form-group input,
+.form-group datalist {
+  font-size: 1.8rem;
+}
+
+#courseRegistrationForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 30%;
+  margin-bottom: 20px;
+}
+
 .footer {
   display: flex;
   flex-direction: row-reverse;
@@ -193,6 +252,66 @@ button.btn {
 
 .footer a.btn:hover {
   background-color: #eee;
+}
+
+/* animated button */
+/* From Uiverse.io by adamgiebl */
+.cssbuttons-io-button {
+  background: var(--anim-btn-color);
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 1.4em;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em var(--anim-btn-shadow-color);
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+  cursor: pointer;
+}
+
+.cssbuttons-io-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em var(--anim-btn-shadow-color);
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: var(--anim-btn-shadow-color);
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
+}
+
+/* Responsive media queries */
+@media screen and (max-width: 1280px) {
 }
 
 @media screen and (max-width: 1024px) {
@@ -223,7 +342,10 @@ button.btn {
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 600px) {
   .title a {
     font-size: 3.5rem;
   }

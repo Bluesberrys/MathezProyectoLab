@@ -201,6 +201,19 @@ main {
   width: 100%;
 }
 
+@media screen and (max-width: 1281px) {
+  .title {
+    font-size: 4rem;
+  }
+  .card-menu {
+    width: 50%;
+    padding: 8% 0;
+  }
+  .footer a.btn {
+    font-size: 2.5rem;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   main {
     flex-direction: column;
@@ -217,7 +230,7 @@ main {
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 600px) {
   .title {
     font-size: 2.5rem;
   }
