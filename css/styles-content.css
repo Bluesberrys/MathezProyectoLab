@@ -1,23 +1,10 @@
-#container {
-  display: flex;
-  justify-content: center;
-  padding: 60px;
-}
-
-#chartContainer2 {
-  width: 100%;
-  background-color: white;
-  border-radius: 10px;
-  padding: 60px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 90%;
+  padding: 20px;
 }
 
 .container-title {
@@ -29,12 +16,17 @@
 }
 
 .topic-section {
-  margin: 20px;
+  width: 100%;
+  margin: 20px 0;
   font-size: 1.8rem;
 }
 
 .topic-subtitle {
   font-weight: 800;
+}
+
+span.italic {
+  font-style: italic;
 }
 
 /*Boton para pasar de curos*/
