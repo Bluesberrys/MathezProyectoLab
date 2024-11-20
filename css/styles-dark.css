@@ -185,6 +185,12 @@ body.dark-mode .btn:hover {
   background-color: #4d70b1;
 }
 
+body.dark-mode .my-form {
+  --_clr-primary: #c7c7c7;
+  --_clr-hover: #f33195;
+  --_clr-checked: #f33195;
+}
+
 @media screen and (max-width: 1024px) {
   .switch {
     font-size: 2rem;

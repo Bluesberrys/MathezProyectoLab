@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -39,15 +39,15 @@
               <button onclick="showView('login')" class="btn alt-font">Iniciar Sesión</button>
               <button onclick="showView('register')" class="btn alt-font">Registro</button>
             </div>
-          </div>
+        </div>
 
-          <!-- Login View -->
-          <div id="loginView" class="view">
+        <!-- Login View -->
+        <div id="loginView" class="view">
             <div class="card-title">
-              <h2 id="iniciar-sesion" class="alt-font">Iniciar sesion</h2>
+              <h2 id="iniciar-sesion" class="alt-font">Iniciar sesión</h2>
             </div>
             <!-- Form -->
-            <form id="loginForm" class="form">
+            <form  id="loginForm" class="form">
               <div class="form-input">
                 <label for="loginNumCta">Número de Cuenta</label>
                 <input
@@ -59,7 +59,7 @@
                   required />
               </div>
               <div class="form-input">
-                <label for="loginPasswd">Contraseña</label>
+                <label for="loginPasswd">Contraseña (ddmmaaaa)</label>
                 <input
                   type="password"
                   id="loginPasswd"
@@ -67,10 +67,10 @@
                   placeholder="Contraseña"
                   required />
               </div>
-              <a href="#" onclick="showView('passwordRecovery'); return false;" class="rec-link"
+              <!--<a href="#" onclick="showView('passwordRecovery'); return false;" class="rec-link"
                 >Olvide mi contraseña</a
-              >
-              <button type="submit" class="btn alt-font">Iniciar Sesion</button>
+              >-->
+              <button type="submit" class="btn alt-font">Iniciar Sesión</button>
             </form>
           </div>
 
@@ -86,11 +86,11 @@
                   <input type="email" id="email" name="email" placeholder="Email" required />
                 </div>
                 <div class="form-input">
-                  <label for="passwd">Contraseña</label>
+                  <label for="passwd">Contraseña (ddmmaaaa)</label>
                   <input type="password" id="passwd" name="passwd" placeholder="Contraseña" required />
                 </div>
                 <div class="form-input">
-                  <label for="confirmPasswd">Confirmar Contraseña</label>
+                  <label for="confirmPasswd">Confirmar Contraseña (ddmmaaaa)</label>
                   <input
                     type="password"
                     id="confirmPasswd"
@@ -101,6 +101,15 @@
                 <button type="button" id="nextBtn" class="btn alt-font">Siguiente</button>
               </div>
               <div id="page2" class="form-page">
+                <div class="form-input">
+                  <label for="matricula">No. de Cuenta</label>
+                  <input
+                    type="text"
+                    id="matricula"
+                    name="matricula"
+                    placeholder="No. de Cuenta"
+                    required />
+                </div>
                 <div class="form-input">
                   <label for="apellidoP">Apellido Paterno</label>
                   <input
@@ -147,7 +156,7 @@
         <div class="">
           <p>©</p>
         </div>
-        <a href="./sobreNos.html" class="btn">Sobre nosotros</a>
+        <a href="./sobreNos.html" class="btn" style="font-size: 17px;">Sobre nosotros</a>
         <div>
           <div class="darkmode-container">
             <h4>Modo oscuro</h4>
@@ -161,5 +170,6 @@
     </footer>
 
     <script src="./js/app.js"></script>
+
   </body>
 </html>

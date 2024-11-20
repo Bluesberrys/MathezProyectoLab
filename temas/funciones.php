@@ -1,11 +1,20 @@
+<?php
+    session_name("sesion_alumno");
+    session_start();
+    if(isset($_SESSION["alumno"]) and $_SESSION["alumno"]==1)
+    {
+      include_once "../solicitudes/conexion.php";
+      $matricula = mysqli_real_escape_string($conexion, $_SESSION["matricula"]);
+      $inscrito = mysqli_query($conexion, "SELECT * FROM inscripciones WHERE numCta = '$matricula'");
+      if(mysqli_num_rows($inscrito) > 0)
+      {
+?>
 <!DOCTYPE html>
-<!-- * ESTE ARCHIVO ES SOLO DE REFERENCIA PARA LA CREACION DE LOS DIFERENTES ARCHIVOS DE CONTENIDO NECESARIOS POR CADA TEMA -->
-<!-- ! REMOVER ESTOS COMENTARIOS AL MOMENTO DE RECREAR PARA CONTENIDO -->
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mathez - [content]</title>
+    <title>Mathez - Funciones</title>
     <link rel="icon" type="image/png" href="../img/M-titanone.png" />
     <link
       rel="stylesheet"
@@ -24,8 +33,8 @@
   <body>
     <header>
       <div class="navbar">
-        <div class="title">
-          <a href="#" onclick="navigateToHome(); return false;" class="alt-font">Mathez</a>
+        <div class="title" style="margin-top: 15px; margin-bottom: 15px;">
+          <a onclick="navigateToHome(); return false;" class="alt-font">Mathez</a>
         </div>
         <div class="navbar-menu">
           <div class="user-dropdown-container">
@@ -34,8 +43,11 @@
               <i class="bi bi-person-circle"></i>
             </button>
             <div class="user-dropdown" id="userDropdown">
-              <a href="./public/configPerfil.html" class="btn alt-font dropdown-item">Configuracion</a>
-              <button onclick="logout()" class="btn alt-font dropdown-item">Cerrar sesion</button>
+                <a href="../homepage.php" class="btn alt-font dropdown-item" style="text-decoration: none;">Inicio</a>
+                <a href="../public/configPerfil.php" class="btn alt-font dropdown-item">Configuración</a>
+                <a href="../solicitudes/cerrar.php" style="text-decoration: none;">
+                    <button type="button" class="btn alt-font dropdown-item">Cerrar sesión</button>
+                </a>
               <div class="darkmode-container dropdown-item">
                 <h4>Modo oscuro</h4>
                 <label class="switch">
@@ -49,12 +61,57 @@
       </div>
     </header>
 
+    <?php
+        
+      $matricula = mysqli_real_escape_string($conexion, $_SESSION["matricula"]);
+
+      $Id_inscrip = mysqli_query($conexion, "SELECT id_inscrip FROM inscripciones WHERE numCta = '$matricula' AND id_curso = '1'");
+
+      $contarID = mysqli_num_rows($Id_inscrip);
+
+      if($contarID == 1)
+      {
+          $row = mysqli_fetch_array($Id_inscrip, MYSQLI_ASSOC);
+          $idInscrip = $row['id_inscrip'];
+      }
+
+      $consultaEstatus = mysqli_query($conexion, "SELECT estatus FROM avances WHERE id_inscrip = '$idInscrip' AND id_tema = 2");
+
+      $contarEstatus = mysqli_num_rows($consultaEstatus);
+
+      if($contarEstatus == 1)
+      {
+        $row = mysqli_fetch_array($consultaEstatus, MYSQLI_ASSOC);
+        $estatus = $row['estatus'];
+      }
+
+    ?>
+
     <main>
+        <br>
+        <?php 
+        /*if($estatus == "En progreso")
+        {
+        ?>
+            <button class="btn-tema" type="submit" onclick="actTemaTerminado('funciones')">
+            Marcar como visto
+            </button>
+        <?php
+        }*/
+        if($estatus == "Terminado")
+        {
+        ?>
+            <button class="btn-tema" type="submit" onclick="actTemaProgreso('funciones')">
+            Tema visto
+            </button>
+        <?php
+        }
+        ?>
       <div class="container">
         <div class="container-title">
           <h1 class="alt-font">
             <!-- Titulo general del tema -->
-            Tipos de funciones - graficacion
+            Tipos de funciones
           </h1>
         </div>
 
@@ -62,8 +119,9 @@
         <section class="topic-section">
           <h2 class="topic-subtitle">
             <!-- subtitulo -->
-            Grafica Continua
+            Gráfica Continua
           </h2>
+          <img src="./img/FunCont.png" alt="Representación de una grafica continua" width="500">
           <!-- contenido -->
           <p>
             Las funciones continuas son esenciales en el cálculo y análisis matemático porque permiten el uso
@@ -92,9 +150,11 @@
 
         <section class="topic-section">
           <h2 class="topic-subtitle">
+            <hr>
             <!-- subtitulo -->
             Grafica discontinua
           </h2>
+          <img src="./img/FunDisc.png" alt="Representación de una funcion disontinua" width="500">
           <!-- contenido -->
           <p>
             Las discontinuidades ayudan a identificar cambios abruptos en el comportamiento de una función o
@@ -124,8 +184,10 @@
         <section class="topic-section">
           <h2 class="topic-subtitle">
             <!-- subtitulo -->
+             <hr>
             Función creciente
           </h2>
+          <img src="./img/FunCrec.png" alt="Representación de una funcion creciente" width="500">
           <!-- contenido -->
           <p>
             Identificar una función creciente permite comprender que la variable dependiente aumenta a medida
@@ -154,8 +216,10 @@
         <section class="topic-section">
           <h2 class="topic-subtitle">
             <!-- subtitulo -->
+             <hr>
             Función decreciente
           </h2>
+          <img src="./img/FunDecr.png" alt="Representación de una función grafica" width="500">
           <!-- contenido -->
           <p>
             Las funciones decrecientes son útiles para modelar situaciones en las que una cantidad disminuye
@@ -172,6 +236,7 @@
         <section class="topic-section">
           <h2 class="topic-subtitle">
             <!-- subtitulo -->
+             <hr>
             Clasificación de funciones
           </h2>
           <!-- contenido -->
@@ -205,6 +270,7 @@
         <section class="topic-section">
           <h2 class="topic-subtitle">
             <!-- subtitulo -->
+             <hr>
             Composición de funciones
           </h2>
           <!-- contenido -->
@@ -248,8 +314,8 @@
           <p></p>
         </section>
 
-        <button class="cssbuttons-io-button">
-          Siguiente tema
+        <button class="cssbuttons-io-button" onclick="window.location.href='../temas/pregFunciones.php'">
+          Realizar cuestionario
           <div class="icon">
             <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 0h24v24H0z" fill="none"></path>
@@ -274,3 +340,16 @@
     <script src="../js/app.js"></script>
   </body>
 </html>
+<?php
+      }
+      else
+      {
+        header("Location: ../homepage.php"); 
+      }
+      mysqli_close($conexion);
+    }
+    else
+    {
+        header("Location: ../index.php"); 
+    }
+?>

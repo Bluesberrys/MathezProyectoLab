@@ -1,5 +1,16 @@
+<?php
+    session_name("sesion_alumno");
+    session_start();
+    if(isset($_SESSION["alumno"]) and $_SESSION["alumno"]==1)
+    {
+      include_once "../solicitudes/conexion.php";
+      $matricula = mysqli_real_escape_string($conexion, $_SESSION["matricula"]);
+      $inscrito = mysqli_query($conexion, "SELECT * FROM inscripciones WHERE numCta = '$matricula'");
+      if(mysqli_num_rows($inscrito) > 0)
+      {
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,8 +33,8 @@
   <body>
     <header>
       <div class="navbar">
-        <div class="title">
-          <a href="#" onclick="navigateToHome(); return false;" class="alt-font">Mathez</a>
+        <div class="title" style="margin-top: 15px; margin-bottom: 15px;">
+          <a onclick="navigateToHome(); return false;" class="alt-font">Mathez</a>
         </div>
         <div class="navbar-menu">
           <div class="user-dropdown-container">
@@ -32,8 +43,11 @@
               <i class="bi bi-person-circle"></i>
             </button>
             <div class="user-dropdown" id="userDropdown">
-              <a href="./public/configPerfil.html" class="btn alt-font dropdown-item">Configuracion</a>
-              <button onclick="logout()" class="btn alt-font dropdown-item">Cerrar sesion</button>
+                <a href="../homepage.php" class="btn alt-font dropdown-item" style="text-decoration: none;">Inicio</a>
+                <a href="../public/configPerfil.php" class="btn alt-font dropdown-item">Configuración</a>
+                <a href="../solicitudes/cerrar.php" style="text-decoration: none;">
+                    <button type="button" class="btn alt-font dropdown-item">Cerrar sesión</button>
+                </a>
               <div class="darkmode-container dropdown-item">
                 <h4>Modo oscuro</h4>
                 <label class="switch">
@@ -47,7 +61,52 @@
       </div>
     </header>
 
+    <?php
+        
+      $matricula = mysqli_real_escape_string($conexion, $_SESSION["matricula"]);
+
+      $Id_inscrip = mysqli_query($conexion, "SELECT id_inscrip FROM inscripciones WHERE numCta = '$matricula' AND id_curso = '1'");
+
+      $contarID = mysqli_num_rows($Id_inscrip);
+
+      if($contarID == 1)
+      {
+          $row = mysqli_fetch_array($Id_inscrip, MYSQLI_ASSOC);
+          $idInscrip = $row['id_inscrip'];
+      }
+
+      $consultaEstatus = mysqli_query($conexion, "SELECT estatus FROM avances WHERE id_inscrip = '$idInscrip' AND id_tema = 1");
+
+      $contarEstatus = mysqli_num_rows($consultaEstatus);
+
+      if($contarEstatus == 1)
+      {
+        $row = mysqli_fetch_array($consultaEstatus, MYSQLI_ASSOC);
+        $estatus = $row['estatus'];
+      }
+
+    ?>
+
     <main>
+      <br>
+      <?php 
+      /*if($estatus == "En progreso")
+      {
+      ?>
+        <button class="btn-tema" type="submit" onclick="actTemaTerminado('conjuntos')">
+        Marcar como visto
+        </button>
+      <?php
+      }*/
+      if($estatus == "Terminado")
+      {
+      ?>
+        <button class="btn-tema" type="submit" onclick="actTemaProgreso('conjuntos')">
+        Tema visto
+        </button>
+      <?php
+      }
+      ?>
       <div class="container">
         <div class="container-title">
           <h1 class="alt-font">
@@ -263,8 +322,8 @@
           <p>Para el punto (3, 2), se marca 3 unidades en el eje 𝑥 y 2 en el eje 𝑦.</p>
         </section>
 
-        <button class="cssbuttons-io-button">
-          Siguiente tema
+        <button class="cssbuttons-io-button" onclick="window.location.href='../temas/pregConjuntos.php'">
+          Realizar cuestionario
           <div class="icon">
             <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 0h24v24H0z" fill="none"></path>
@@ -289,3 +348,16 @@
     <script src="../js/app.js"></script>
   </body>
 </html>
+<?php
+      }
+      else
+      {
+        header("Location: ../homepage.php"); 
+      }
+      mysqli_close($conexion);
+    }
+    else
+    {
+        header("Location: ../index.php"); 
+    }
+?>
